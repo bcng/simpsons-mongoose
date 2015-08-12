@@ -20,3 +20,16 @@ app.get('/simpson', SimpsonsCtrl.read);
 app.put('/simpson/:id', SimpsonsCtrl.update);
 app.delete('/simpson/:id', SimpsonsCtrl.delete);
 
+// Connections
+var port = 11331;
+var mongoUri = 'mongodb://localhost:27017/simpsons-mongoose';
+
+mongoose.set('debug', true); 
+mongoose.connect(mongoUri);
+mongoose.connection.once('open', function() {
+  console.log('connected to mongoDB at: ', mongoUri);
+});
+
+app.listen(port, function() {
+  console.log('listening on port: ', port);
+});
